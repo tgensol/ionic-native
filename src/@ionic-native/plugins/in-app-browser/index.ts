@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Plugin, CordovaInstance, InstanceCheck, IonicNativePlugin } from '@ionic-native/core';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
+import { Observable } from 'rxjs';
+import { Observer } from 'rxjs';
 
 declare const cordova: Cordova & { InAppBrowser: any; };
 
@@ -89,7 +89,7 @@ export class InAppBrowserObject {
    *                 The options string must not contain any blank space, and each feature's
    *                 name/value pairs must be separated by a comma. Feature names are case insensitive.
    */
-  constructor(url: string, target?: string, options?: string | InAppBrowserOptions) {
+  constructor (url: string, target?: string, options?: string | InAppBrowserOptions) {
     try {
 
       if (options && typeof options !== 'string') {
@@ -111,20 +111,20 @@ export class InAppBrowserObject {
    * if the InAppBrowser was already visible.
    */
   @CordovaInstance({ sync: true })
-  show(): void { }
+  show (): void { }
 
   /**
    * Closes the InAppBrowser window.
    */
   @CordovaInstance({ sync: true })
-  close(): void { }
+  close (): void { }
 
   /**
    * Hides an InAppBrowser window that is currently shown. Calling this has no effect
    * if the InAppBrowser was already hidden.
    */
   @CordovaInstance({ sync: true })
-  hide(): void { }
+  hide (): void { }
 
   /**
    * Injects JavaScript code into the InAppBrowser window.
@@ -132,7 +132,7 @@ export class InAppBrowserObject {
    * @returns {Promise<any>}
    */
   @CordovaInstance()
-  executeScript(script: { file?: string, code?: string }): Promise<any> { return; }
+  executeScript (script: { file?: string, code?: string }): Promise<any> { return; }
 
   /**
    * Injects CSS into the InAppBrowser window.
@@ -140,7 +140,7 @@ export class InAppBrowserObject {
    * @returns {Promise<any>}
    */
   @CordovaInstance()
-  insertCSS(css: { file?: string, code?: string }): Promise<any> { return; }
+  insertCSS (css: { file?: string, code?: string }): Promise<any> { return; }
 
   /**
    * A method that allows you to listen to events happening in the browser.
@@ -148,7 +148,7 @@ export class InAppBrowserObject {
    * @returns {Observable<InAppBrowserEvent>} Returns back an observable that will listen to the event on subscribe, and will stop listening to the event on unsubscribe.
    */
   @InstanceCheck()
-  on(event: string): Observable<InAppBrowserEvent> {
+  on (event: string): Observable<InAppBrowserEvent> {
     return new Observable<InAppBrowserEvent>((observer: Observer<InAppBrowserEvent>) => {
       this._objectInstance.addEventListener(event, observer.next.bind(observer));
       return () => this._objectInstance.removeEventListener(event, observer.next.bind(observer));
@@ -206,7 +206,7 @@ export class InAppBrowser extends IonicNativePlugin {
    *                 name/value pairs must be separated by a comma. Feature names are case insensitive.
    * @returns {InAppBrowserObject}
    */
-  create(url: string, target?: string, options?: string | InAppBrowserOptions): InAppBrowserObject {
+  create (url: string, target?: string, options?: string | InAppBrowserOptions): InAppBrowserObject {
     return new InAppBrowserObject(url, target, options);
   }
 

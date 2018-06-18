@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Cordova, IonicNativePlugin, Plugin } from '@ionic-native/core';
-import { Observable } from 'rxjs/Observable';
-import { fromEvent } from 'rxjs/observable/fromEvent';
+import { Observable, fromEvent } from 'rxjs';
 
 export interface AdMobFreeBannerConfig {
   /**
@@ -68,7 +67,7 @@ export interface AdMobFreeRewardVideoConfig {
  * @name AdMob Free
  * @description
  * A free, no ad-sharing version of Google AdMob plugin for Cordova.
- * 
+ *
  * Requires Cordova plugin: `cordova-plugin-admob-free`. For more info, please see the [AdMob Free plugin docs](https://github.com/ratson/cordova-plugin-admob-free).
  *
  * @usage
@@ -148,7 +147,7 @@ export class AdMobFree extends IonicNativePlugin {
    * @param event {string} event name
    * @return {Observable<any>}
    */
-  on(event: string): Observable<any> {
+  on (event: string): Observable<any> {
     return fromEvent(document, event);
   }
 
@@ -186,7 +185,7 @@ export class AdMobFreeBanner {
    * @return {AdMobFreeBannerConfig}
    */
   @Cordova({ sync: true })
-  config(options: AdMobFreeBannerConfig): AdMobFreeBannerConfig {
+  config (options: AdMobFreeBannerConfig): AdMobFreeBannerConfig {
     return;
   }
 
@@ -195,7 +194,7 @@ export class AdMobFreeBanner {
    * @return {Promise<any>}
    */
   @Cordova({ otherPromise: true })
-  hide(): Promise<any> {
+  hide (): Promise<any> {
     return;
   }
 
@@ -204,7 +203,7 @@ export class AdMobFreeBanner {
    * @return {Promise<any>}
    */
   @Cordova({ otherPromise: true })
-  prepare(): Promise<any> {
+  prepare (): Promise<any> {
     return;
   }
 
@@ -213,7 +212,7 @@ export class AdMobFreeBanner {
    * @return {Promise<any>}
    */
   @Cordova({ otherPromise: true })
-  remove(): Promise<any> {
+  remove (): Promise<any> {
     return;
   }
 
@@ -222,7 +221,7 @@ export class AdMobFreeBanner {
    * @return {Promise<any>}
    */
   @Cordova({ otherPromise: true })
-  show(): Promise<any> {
+  show (): Promise<any> {
     return;
   }
 }
@@ -242,7 +241,7 @@ export class AdMobFreeInterstitial {
    * @return {AdMobFreeInterstitialConfig}
    */
   @Cordova({ sync: true })
-  config(options: AdMobFreeInterstitialConfig): AdMobFreeInterstitialConfig {
+  config (options: AdMobFreeInterstitialConfig): AdMobFreeInterstitialConfig {
     return;
   }
 
@@ -251,7 +250,7 @@ export class AdMobFreeInterstitial {
    * @return {Promise<any>}
    */
   @Cordova({ otherPromise: true })
-  isReady(): Promise<any> {
+  isReady (): Promise<any> {
     return;
   }
 
@@ -260,7 +259,7 @@ export class AdMobFreeInterstitial {
    * @return {Promise<any>}
    */
   @Cordova({ otherPromise: true })
-  prepare(): Promise<any> {
+  prepare (): Promise<any> {
     return;
   }
 
@@ -269,7 +268,7 @@ export class AdMobFreeInterstitial {
    * @return {Promise<any>}
    */
   @Cordova({ otherPromise: true })
-  show(): Promise<any> {
+  show (): Promise<any> {
     return;
   }
 }
@@ -289,7 +288,7 @@ export class AdMobFreeRewardVideo {
    * @return {AdMobFreeRewardVideoConfig}
    */
   @Cordova({ sync: true })
-  config(options: AdMobFreeRewardVideoConfig): AdMobFreeRewardVideoConfig {
+  config (options: AdMobFreeRewardVideoConfig): AdMobFreeRewardVideoConfig {
     return;
   }
 
@@ -298,7 +297,7 @@ export class AdMobFreeRewardVideo {
    * @return {Promise<any>}
    */
   @Cordova({ otherPromise: true })
-  isReady(): Promise<any> {
+  isReady (): Promise<any> {
     return;
   }
 
@@ -307,7 +306,7 @@ export class AdMobFreeRewardVideo {
    * @return {Promise<any>}
    */
   @Cordova({ otherPromise: true })
-  prepare(): Promise<any> {
+  prepare (): Promise<any> {
     return;
   }
 
@@ -316,7 +315,7 @@ export class AdMobFreeRewardVideo {
    * @return {Promise<any>}
    */
   @Cordova({ otherPromise: true })
-  show(): Promise<any> {
+  show (): Promise<any> {
     return;
   }
 }

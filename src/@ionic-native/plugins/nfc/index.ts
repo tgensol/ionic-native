@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Plugin, Cordova, IonicNativePlugin, CordovaProperty } from '@ionic-native/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 declare let window: any;
 
 export interface NdefEvent {

@@ -11,7 +11,7 @@ import { Injectable } from '@angular/core';
  * ```typescript
  * import { CouchbaseLite } from '@ionic-native/couchbase-lite';
  * import { Http } from '@angular/http';
- * import { Observable } from 'rxjs/Observable'
+ * import { Observable } from 'rxjs'
  * constructor(private couchbase: CouchbaseLite, private platform:Platform,private _http:Http) {
  *    this.initMethod();
  * }
@@ -66,8 +66,8 @@ import { Injectable } from '@angular/core';
  *        .catch((error:any) => {
  *           return Observable.throw(error.json() || 'Couchbase Lite error');
  *        })        .
- * }      
- * createDocument(database_name:string,document){   
+ * }
+ * createDocument(database_name:string,document){
  *      let url = this.getUrl();
  *      url = url + database_name;
  *      return this._http
@@ -84,9 +84,9 @@ import { Injectable } from '@angular/core';
  * createDocument('justbe', document);
  * // successful response
  * { "id": "string","rev": "string","ok": true }
- * updateDocument(database_name:string,document){    
+ * updateDocument(database_name:string,document){
  *      let url = this.getUrl();
- *      url = url + database_name + '/' + document._id;     
+ *      url = url + database_name + '/' + document._id;
  *      return this._http
  *        .put(url,document)
  *        .map(data => { this.results = data['results'] })
@@ -129,6 +129,6 @@ export class CouchbaseLite extends IonicNativePlugin {
   @Cordova({
     callbackStyle: 'node'
   })
-  getURL(): Promise<any> { return; }
+  getURL (): Promise<any> { return; }
 
 }

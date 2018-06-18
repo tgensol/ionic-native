@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Cordova, Plugin, CordovaCheck, IonicNativePlugin } from '@ionic-native/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 declare const cordova: any;
 

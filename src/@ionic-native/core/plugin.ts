@@ -1,5 +1,5 @@
-import { Observable } from 'rxjs/Observable';
-import { fromEvent } from 'rxjs/observable/fromEvent';
+import { Observable, fromEvent } from 'rxjs';
+
 
 import { checkReady } from './bootstrap';
 import { CordovaOptions } from './decorators';
@@ -18,17 +18,17 @@ export const ERR_PLUGIN_NOT_INSTALLED = { error: 'plugin_not_installed' };
  * @return {boolean | { error: string } }
  * @private
  */
-export function checkAvailability(
+export function checkAvailability (
   pluginRef: string,
   methodName?: string,
   pluginName?: string
 ): boolean | { error: string };
-export function checkAvailability(
+export function checkAvailability (
   pluginObj: any,
   methodName?: string,
   pluginName?: string
 ): boolean | { error: string };
-export function checkAvailability(
+export function checkAvailability (
   plugin: any,
   methodName?: string,
   pluginName?: string
@@ -65,7 +65,7 @@ export function checkAvailability(
  * Checks if _objectInstance exists and has the method/property
  * @private
  */
-export function instanceAvailability(
+export function instanceAvailability (
   pluginObj: any,
   methodName?: string
 ): boolean {
@@ -76,7 +76,7 @@ export function instanceAvailability(
   );
 }
 
-function setIndex(
+function setIndex (
   args: any[],
   opts: any = {},
   resolve?: Function,
@@ -147,7 +147,7 @@ function setIndex(
   return args;
 }
 
-function callCordovaPlugin(
+function callCordovaPlugin (
   pluginObj: any,
   methodName: string,
   args: any[],
@@ -169,7 +169,7 @@ function callCordovaPlugin(
   }
 }
 
-function wrapPromise(
+function wrapPromise (
   pluginObj: any,
   methodName: string,
   args: any[],
@@ -202,13 +202,13 @@ function wrapPromise(
   // a warning that Cordova is undefined or the plugin is uninstalled, so there is no reason
   // to error
   if (pluginResult && pluginResult.error) {
-    p.catch(() => {});
+    p.catch(() => { });
     typeof rej === 'function' && rej(pluginResult.error);
   }
   return p;
 }
 
-function wrapOtherPromise(
+function wrapOtherPromise (
   pluginObj: any,
   methodName: string,
   args: any[],
@@ -228,7 +228,7 @@ function wrapOtherPromise(
   });
 }
 
-function wrapObservable(
+function wrapObservable (
   pluginObj: any,
   methodName: string,
   args: any[],
@@ -288,7 +288,7 @@ function wrapObservable(
   });
 }
 
-function callInstance(
+function callInstance (
   pluginObj: any,
   methodName: string,
   args: any[],
@@ -313,7 +313,7 @@ function callInstance(
  * @param element The element to attach the event listener to
  * @returns {Observable}
  */
-export function wrapEventObservable(
+export function wrapEventObservable (
   event: string,
   element: any = window
 ): Observable<any> {
@@ -328,7 +328,7 @@ export function wrapEventObservable(
  * does just this.
  * @private
  */
-export function overrideFunction(
+export function overrideFunction (
   pluginObj: any,
   methodName: string,
   args: any[],
@@ -344,7 +344,7 @@ export function overrideFunction(
     if (availabilityCheck === true) {
       const pluginInstance = getPlugin(pluginObj.constructor.getPluginRef());
       pluginInstance[methodName] = observer.next.bind(observer);
-      return () => (pluginInstance[methodName] = () => {});
+      return () => (pluginInstance[methodName] = () => { });
     } else {
       observer.error(availabilityCheck);
       observer.complete();
@@ -355,7 +355,7 @@ export function overrideFunction(
 /**
  * @private
  */
-export const wrap = function(
+export const wrap = function (
   pluginObj: any,
   methodName: string,
   opts: CordovaOptions = {}
@@ -379,7 +379,7 @@ export const wrap = function(
 /**
  * @private
  */
-export function wrapInstance(
+export function wrapInstance (
   pluginObj: any,
   methodName: string,
   opts: any = {}
@@ -495,7 +495,7 @@ export function wrapInstance(
       // a warning that Cordova is undefined or the plugin is uninstalled, so there is no reason
       // to error
       if (pluginResult && pluginResult.error) {
-        p.catch(() => {});
+        p.catch(() => { });
         typeof rej === 'function' && rej(pluginResult.error);
       }
       return p;

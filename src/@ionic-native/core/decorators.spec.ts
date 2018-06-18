@@ -1,6 +1,6 @@
 import 'core-js';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import {
   Cordova,

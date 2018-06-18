@@ -1,6 +1,5 @@
-import { _throw } from 'rxjs/observable/throw';
-
-import { Observable } from 'rxjs/Observable';
+import { throwError as _throw } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import {
   checkAvailability,
@@ -116,24 +115,24 @@ export interface CordovaCheckOptions {
 /**
  * @private
  */
-export function InstanceCheck(opts: CordovaCheckOptions = {}) {
+export function InstanceCheck (opts: CordovaCheckOptions = {}) {
   return (
     pluginObj: Object,
     methodName: string,
     descriptor: TypedPropertyDescriptor<any>
   ): TypedPropertyDescriptor<any> => {
     return {
-      value: function(...args: any[]): any {
+      value: function (...args: any[]): any {
         if (instanceAvailability(this)) {
           return descriptor.value.apply(this, args);
         } else {
           if (opts.sync) {
             return;
           } else if (opts.observable) {
-            return new Observable<any>(() => {});
+            return new Observable<any>(() => { });
           }
 
-          return getPromise(() => {});
+          return getPromise(() => { });
         }
       },
       enumerable: true
@@ -145,14 +144,14 @@ export function InstanceCheck(opts: CordovaCheckOptions = {}) {
  * Executes function only if plugin is available
  * @private
  */
-export function CordovaCheck(opts: CordovaCheckOptions = {}) {
+export function CordovaCheck (opts: CordovaCheckOptions = {}) {
   return (
     pluginObj: Object,
     methodName: string,
     descriptor: TypedPropertyDescriptor<any>
   ): TypedPropertyDescriptor<any> => {
     return {
-      value: function(...args: any[]): any {
+      value: function (...args: any[]): any {
         const check = checkAvailability(pluginObj);
         if (check === true) {
           return descriptor.value.apply(this, args);
@@ -189,42 +188,42 @@ export function CordovaCheck(opts: CordovaCheckOptions = {}) {
  *  }
  * ```
  */
-export function Plugin(config: PluginConfig): ClassDecorator {
-  return function(cls: any) {
+export function Plugin (config: PluginConfig): ClassDecorator {
+  return function (cls: any) {
     // Add these fields to the class
     for (let prop in config) {
       cls[prop] = config[prop];
     }
 
-    cls['installed'] = function(printWarning?: boolean) {
+    cls['installed'] = function (printWarning?: boolean) {
       return !!getPlugin(config.pluginRef);
     };
 
-    cls['getPlugin'] = function() {
+    cls['getPlugin'] = function () {
       return getPlugin(config.pluginRef);
     };
 
-    cls['checkInstall'] = function() {
+    cls['checkInstall'] = function () {
       return checkAvailability(cls) === true;
     };
 
-    cls['getPluginName'] = function() {
+    cls['getPluginName'] = function () {
       return config.pluginName;
     };
 
-    cls['getPluginRef'] = function() {
+    cls['getPluginRef'] = function () {
       return config.pluginRef;
     };
 
-    cls['getPluginInstallName'] = function() {
+    cls['getPluginInstallName'] = function () {
       return config.plugin;
     };
 
-    cls['getPluginRepo'] = function() {
+    cls['getPluginRepo'] = function () {
       return config.repo;
     };
 
-    cls['getSupportedPlatforms'] = function() {
+    cls['getSupportedPlatforms'] = function () {
       return config.platforms;
     };
 
@@ -238,14 +237,14 @@ export function Plugin(config: PluginConfig): ClassDecorator {
  * Wrap a stub function in a call to a Cordova plugin, checking if both Cordova
  * and the required plugin are installed.
  */
-export function Cordova(opts: CordovaOptions = {}) {
+export function Cordova (opts: CordovaOptions = {}) {
   return (
     target: Object,
     methodName: string,
     descriptor: TypedPropertyDescriptor<any>
   ) => {
     return {
-      value: function(...args: any[]) {
+      value: function (...args: any[]) {
         return wrap(this, methodName, opts).apply(this, args);
       },
       enumerable: true
@@ -258,10 +257,10 @@ export function Cordova(opts: CordovaOptions = {}) {
  *
  * Wrap an instance method
  */
-export function CordovaInstance(opts: CordovaOptions = {}) {
+export function CordovaInstance (opts: CordovaOptions = {}) {
   return (target: Object, methodName: string) => {
     return {
-      value: function(...args: any[]) {
+      value: function (...args: any[]) {
         return wrapInstance(this, methodName, opts).apply(this, args);
       },
       enumerable: true
@@ -275,7 +274,7 @@ export function CordovaInstance(opts: CordovaOptions = {}) {
  *
  * Before calling the original method, ensure Cordova and the plugin are installed.
  */
-export function CordovaProperty(target: any, key: string) {
+export function CordovaProperty (target: any, key: string) {
   Object.defineProperty(target, key, {
     enumerable: true,
     get: () => {
@@ -299,13 +298,13 @@ export function CordovaProperty(target: any, key: string) {
  * @param key
  * @constructor
  */
-export function InstanceProperty(target: any, key: string) {
+export function InstanceProperty (target: any, key: string) {
   Object.defineProperty(target, key, {
     enumerable: true,
-    get: function() {
+    get: function () {
       return this._objectInstance[key];
     },
-    set: function(value) {
+    set: function (value) {
       this._objectInstance[key] = value;
     }
   });
@@ -317,14 +316,14 @@ export function InstanceProperty(target: any, key: string) {
  * Wrap a stub function in a call to a Cordova plugin, checking if both Cordova
  * and the required plugin are installed.
  */
-export function CordovaFunctionOverride(opts: any = {}) {
+export function CordovaFunctionOverride (opts: any = {}) {
   return (
     target: Object,
     methodName: string,
     descriptor: TypedPropertyDescriptor<any>
   ) => {
     return {
-      value: function(...args: any[]) {
+      value: function (...args: any[]) {
         return overrideFunction(this, methodName, opts);
       },
       enumerable: true

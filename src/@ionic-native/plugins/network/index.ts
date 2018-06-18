@@ -6,8 +6,8 @@ import {
   CordovaCheck,
   IonicNativePlugin
 } from '@ionic-native/core';
-import { Observable } from 'rxjs/Observable';
-import { merge } from 'rxjs/observable/merge';
+import { Observable } from 'rxjs';
+import { merge } from 'rxjs/operators';
 
 declare const navigator: any;
 
@@ -80,7 +80,7 @@ export class Network extends IonicNativePlugin {
    */
   @CordovaCheck()
   onchange(): Observable<any> {
-    return merge(this.onConnect(), this.onDisconnect());
+    return  merge(this.onConnect(), this.onDisconnect());
   }
 
   /**
